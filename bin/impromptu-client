@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [[ -z "$IMPROMPTU_PORT" ]]; then
+  IMPROMPTU_PORT="1624"
+fi
+
 # Record the shell's environment.
 REQUEST="$(printenv)"
 
@@ -12,7 +16,7 @@ fi
 generate_prompt() {
   curl --max-time 1 --silent \
   -H "Accept: application/json" -H "Content-type: application/json" \
-  -X POST -d "$REQUEST" http://localhost:1624/
+  -X POST -d "$REQUEST" "http://localhost:$IMPROMPTU_PORT/"
 }
 
 generate_prompt
